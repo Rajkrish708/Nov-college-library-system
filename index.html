@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CU Library Seat Finder</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         LOGIN
+    ====================================================== -->
+
+    <div id="loginPage" class="page">
+
+        <div class="login-box">
+
+            <div class="logo">📚</div>
+
+            <h1>CU Library Seat Finder</h1>
+
+            <p class="login-subtitle">
+                Chandigarh University
+            </p>
+
+            <input type="text" id="uid" placeholder="Enter your UID" autocomplete="username">
+
+            <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password">
+
+            <button class="login-button" onclick="login()">
+                Login
+            </button>
+
+            <p id="loginError" class="error">
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN APPLICATION
+    ====================================================== -->
+
+    <div id="appPage" class="hidden">
+
+        <!-- HEADER -->
+
+        <header>
+
+            <div class="brand-area">
+
+                <div class="brand-icon">
+                    📚
+                </div>
+
+                <div>
+                    <h2>
+                        CU Library Seat Finder
+                    </h2>
+
+                    <p id="welcomeText"></p>
+                </div>
+
+            </div>
+
+
+            <div class="header-buttons">
+
+                <button id="adminButton" class="admin-btn hidden" onclick="openAdmin()">
+                    ⚙ Admin Panel
+                </button>
+
+                <button onclick="logout()" class="logout-btn">
+                    Logout
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             MAIN
+        ================================================== -->
+
+        <main>
+
+            <!-- HERO -->
+
+            <section class="hero">
+
+                <div class="hero-content">
+
+                    <span class="hero-label">
+                        SMART LIBRARY MANAGEMENT
+                    </span>
+
+                    <h1>
+                        Find Your Perfect
+                        <span>Study Seat</span>
+                    </h1>
+
+                    <p>
+                        Check seat availability, explore seat
+                        facilities and reserve your preferred
+                        study space easily.
+                    </p>
+
+                </div>
+
+
+                <div class="user-card">
+
+                    <span>
+                        Logged in as
+                    </span>
+
+                    <strong id="userUid"></strong>
+
+                    <small>
+                        Chandigarh University
+                    </small>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 ANNOUNCEMENTS
+            ================================================== -->
+
+            <section class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-kicker">
+                            CAMPUS UPDATES
+                        </span>
+
+                        <h2>
+                            📢 Announcements
+                        </h2>
+                    </div>
+
+                </div>
+
+                <div id="announcementArea">
+
+                    <div class="empty-state">
+                        No announcements right now.
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PERSONAL NOTICES
+            ================================================== -->
+
+            <section id="noticeArea"></section>
+
+
+            <!-- =================================================
+                 CURRENT BOOKING
+            ================================================== -->
+
+            <section class="current-booking">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-kicker">
+                            YOUR RESERVATION
+                        </span>
+
+                        <h2>
+                            🎫 My Active Booking
+                        </h2>
+                    </div>
+
+                </div>
+
+                <div id="myBooking">
+
+                    <div class="empty-state">
+                        No active booking.
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 LIBRARIES
+            ================================================== -->
+
+            <section class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-kicker">
+                            STUDY SPACES
+                        </span>
+
+                        <h2>
+                            📍 Libraries
+                        </h2>
+
+                        <p>
+                            Select a library to explore its seats.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div id="libraryCards" class="library-grid">
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SEAT SECTION
+            ================================================== -->
+
+            <section id="seatSection" class="seat-section hidden">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <span class="section-kicker">
+                            SEAT MAP
+                        </span>
+
+                        <h2 id="libraryTitle">
+                            Library Seats
+                        </h2>
+
+                        <p>
+                            Select a seat to see its facilities
+                            and booking options.
+                        </p>
+
+                    </div>
+
+
+                    <button onclick="closeSeats()" class="secondary-btn">
+                        ← Back
+                    </button>
+
+                </div>
+
+
+                <div class="legend">
+
+                    <span>
+                        <i class="free"></i>
+                        Available
+                    </span>
+
+                    <span>
+                        <i class="occupied"></i>
+                        Occupied
+                    </span>
+
+                    <span>
+                        <i class="premium"></i>
+                        Premium
+                    </span>
+
+                </div>
+
+
+                <div id="seatGrid" class="seat-grid">
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FUTURE FEATURES
+            ================================================== -->
+
+            <section class="dashboard-section future-section">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-kicker">
+                            COMING SOON
+                        </span>
+
+                        <h2>
+                            🚀 What's Coming Next
+                        </h2>
+
+                        <p>
+                            More smart-library features are
+                            planned for future versions.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="future-grid">
+
+                    <div class="future-card">
+
+                        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=900&q=80"
+                            alt="Modern library">
+
+                        <div class="future-card-body">
+
+                            <span class="coming-badge">
+                                COMING SOON
+                            </span>
+
+                            <h3>
+                                Smart Study Zones
+                            </h3>
+
+                            <p>
+                                Find quiet zones, group study
+                                areas and specialised study
+                                spaces.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="future-card">
+
+                        <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=900&q=80"
+                            alt="Books in library">
+
+                        <div class="future-card-body">
+
+                            <span class="coming-badge">
+                                COMING SOON
+                            </span>
+
+                            <h3>
+                                Digital Library Services
+                            </h3>
+
+                            <p>
+                                Access digital resources and
+                                library services from one place.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="future-card">
+
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"
+                            alt="Student using laptop">
+
+                        <div class="future-card-body">
+
+                            <span class="coming-badge">
+                                COMING SOON
+                            </span>
+
+                            <h3>
+                                Smart Check-In
+                            </h3>
+
+                            <p>
+                                Faster entry and automated
+                                attendance using smart check-in.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="future-card">
+
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80"
+                            alt="Students studying">
+
+                        <div class="future-card-body">
+
+                            <span class="coming-badge">
+                                COMING SOON
+                            </span>
+
+                            <h3>
+                                Campus Study Analytics
+                            </h3>
+
+                            <p>
+                                Understand library usage and
+                                improve study-space planning.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         MODAL
+    ====================================================== -->
+
+    <div id="modal" class="modal hidden">
+
+        <div class="modal-box">
+
+            <button class="close" onclick="closeModal()">
+                ×
+            </button>
+
+            <div id="modalContent"></div>
+
+        </div>
+
+    </div>
+
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
